@@ -10,9 +10,9 @@ export type {
   ResponseInterceptorContext,
 } from "./intercept";
 export type {
+  FeqiResponseType,
   FetchOptions,
   FetchRequest,
-  FeqiResponseType,
   ResponseMap,
 } from "./types";
 

@@ -71,12 +71,9 @@ test("runs request and response interceptors", async () => {
         (request, context) => {
           expect(context.input).toBe("https://example.com");
           expect(context.baseURL).toBeUndefined();
-          const headers = new Headers(request.headers);
-          headers.set("authorization", "Bearer token");
+          request.headers.set("authorization", "Bearer token");
 
-          return new Request(request, {
-            headers,
-          });
+          return request;
         },
       ],
       response: [

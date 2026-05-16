@@ -12,7 +12,8 @@
     "typecheck": "tsc --noEmit",
     "bump": "bumpp --execute=\"pnpm i\" --no-push",
     "check": "ultracite check",
-    "fix": "ultracite fix"
+    "fix": "ultracite fix",
+    "prepublish": "pnpm build"
   },
   "keywords": [
     "fetch",

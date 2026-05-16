@@ -14,12 +14,12 @@ export interface ResponseInterceptorContext extends RequestInterceptorContext {
 export type RequestInterceptor = (
   request: Request,
   context: RequestInterceptorContext
-) => Request | void | Promise<Request | void>;
+) => Request | undefined | Promise<Request | undefined>;
 
 export type ResponseInterceptor = (
   response: Response,
   context: ResponseInterceptorContext
-) => Response | void | Promise<Response | void>;
+) => Response | undefined | Promise<Response | undefined>;
 
 export async function applyRequestInterceptors(
   request: Request,
