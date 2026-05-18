@@ -1,5 +1,6 @@
 import { afterEach, expect, test, vi } from "vitest";
 import { createFeqi } from "../src/feqi";
+import { FeqiResponseError } from "../src/response";
 
 afterEach(() => {
   vi.restoreAllMocks();
@@ -96,4 +97,32 @@ test("runs request and response interceptors", async () => {
     intercepted: true,
     token: "Bearer token",
   });
+});
+
+test("throws when response is not ok", async () => {
+  vi.stubGlobal(
+    "fetch",
+    vi.fn(async () =>
+      Response.json(
+        {
+          message: "nope",
+        },
+        {
+          status: 500,
+          statusText: "Internal Server Error",
+        }
+      )
+    )
+  );
+
+  const feqi = createFeqi();
+
+  await expect(feqi("https://example.com")).rejects.toMatchObject({
+    name: "FeqiResponseError",
+    status: 500,
+    statusText: "Internal Server Error",
+  });
+  await expect(feqi("https://example.com")).rejects.toBeInstanceOf(
+    FeqiResponseError
+  );
 });

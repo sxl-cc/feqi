@@ -5,7 +5,7 @@ import {
   type ResponseInterceptor,
 } from "./intercept";
 import { createRequest } from "./request";
-import { decodeResponse } from "./response";
+import { assertResponseOk, decodeResponse } from "./response";
 import type { FetchOptions, FetchRequest } from "./types";
 
 export interface CreateFeqiOptions {
@@ -49,6 +49,8 @@ export function createFeqi(options: CreateFeqiOptions = {}): Feqi {
       },
       options.interceptors?.response
     );
+
+    assertResponseOk(response);
 
     return (await decodeResponse(response, fetchOptions.responseType)) as T;
   };

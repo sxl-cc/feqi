@@ -9,6 +9,7 @@ export type {
   ResponseInterceptor,
   ResponseInterceptorContext,
 } from "./intercept";
+export { FeqiResponseError } from "./response";
 export type {
   FeqiResponseType,
   FetchOptions,
