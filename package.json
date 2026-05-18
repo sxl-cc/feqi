@@ -9,7 +9,7 @@
   "scripts": {
     "build": "tsdown",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit",
+    "tc": "tsc --noEmit",
     "bump": "bumpp --execute=\"pnpm i\" --no-push",
     "check": "ultracite check",
     "fix": "ultracite fix",

@@ -1,0 +1,47 @@
+name: CI
+
+env:
+  COREPACK_DEFAULT_TO_LATEST: 0
+
+on:
+  pull_request:
+    branches: [main]
+
+  push:
+    branches: [main]
+
+  merge_group:
+
+  workflow_dispatch:
+
+  workflow_call:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 1
+
+      - name: Install Pnpm
+        run: corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Lint
+        run: pnpm check
+
+      - name: Typecheck
+        run: pnpm tc
+
+      - name: Test
+        run: pnpm test
